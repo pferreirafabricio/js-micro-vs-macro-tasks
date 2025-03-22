@@ -2,24 +2,24 @@
 
 ## Event Loop
 
-The event loop is basic a endless loop that process tasks from a queue on a “first come – first served” basis.
+The event loop is an endless loop that processes tasks from a queue on a “first come – first served” basis.
 
-The basic operating mode of the engine is to execute the tasks then sleeps, waiting for more tasks.
+The basic operating mode of the engine is to execute the tasks and then sleep, waiting for more tasks.
 
-The tasks in a queue are called "macrotask queue".
+The tasks in a queue are called "macrotask queues".
 
 Two important points:
 
 1. The DOM is only rendered after the task is completed;
-2. If a tasks take to long, due to complex calculations or a programming error (like a infinite loop), after some time it raises an alert like “Page Unresponsive”, to kill the task with the whole page.
+2. If a tasks take too long, due to complex calculations or a programming error (like an infinite loop), after some time it raises an alert like “Page Unresponsive”, to kill the task with the whole page.
 
 ### Macro and Micro tasks
 
-Macrotasks can be scheduled from our code as well as other sources (ex: setTimeout, setInterval, scripts, etc.).
+Macrotasks can be scheduled from our code as well as from other sources (ex: setTimeout, setInterval, scripts, etc.).
 
-Microtasks come only from our code (ex: Promises, await, queueMicroTask, process.nextTick, etc.).
+Microtasks come only from our code (ex: Promises, async/await, queueMicroTask, process.nextTick, etc.).
 
-**Immediately after every macrotask, the engine executes all tasks from microtask queue, prior to running any other macrotasks or rendering or anything else.**
+**Immediately after every macrotask, the engine executes all tasks from the microtask queue before running any other macrotasks, rendering, or anything else.**
 
 ## Example
 
