@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counting progress</title>
+</head>
+
+<body>
+    <main>
+        <div id="progress">0</div>
+        <button>Am I clickable?</button>
+    </main>
+</body>
+
+<script>
+    const maxProgress = 1e6;
+    let currentIndex = 0;
+    let progressElement = document.getElementById("progress");
+
+    function countBlocking() {
+        const startTime = Date.now();
+
+        while (currentIndex < maxProgress) {
+            currentIndex++;
+            progressElement.innerHTML = currentIndex;
+        }
+
+        console.log(`Finished in: ${Date.now() - startTime}ms`);
+    }
+
+    function countScheduling() {
+        const startTime = Date.now();
+
+        do {
+            currentIndex++;
+            progressElement.innerHTML = currentIndex;
+        } while (currentIndex % 1e2 !== 0);
+
+        if (currentIndex < maxProgress) {
+            console.log(`Scheduling continue the process from: ${currentIndex}`);
+
+            setTimeout(countScheduling);
+            return;
+        }
+
+        console.log(`Finished in: ${Date.now() - startTime}ms`);
+    }
+
+    // countBlocking();
+    // countScheduling();
+</script>
+
+</html>
